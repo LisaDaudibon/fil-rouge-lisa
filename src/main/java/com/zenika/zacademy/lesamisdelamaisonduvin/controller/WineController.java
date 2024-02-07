@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-
 @RestController
 @RequestMapping("/wines")
 public class WineController {
@@ -46,7 +44,7 @@ public class WineController {
         return wineAdded;
     }
 
-    @DeleteMapping("{/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteById (@PathVariable("id") int searchedId){
         // TODO - Gérer les cas d'erreurs (try/catch + exception)
@@ -54,5 +52,11 @@ public class WineController {
         wineService.deleteByID(searchedId);
     }
 
-
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Wine updateById (@PathVariable("id") int searchedId, @RequestBody Wine wineUpdated) {
+        // TODO - Gérer les cas d'erreur (try / catch + exception)
+        logger.info("Update a Wine with id " + searchedId);
+        return wineService.updateById(searchedId, wineUpdated);
+    }
 }

@@ -30,4 +30,11 @@ public class WineService {
         Wine deletedWine = getOneById(searchedId);
         inMemoryWineRepository.delete(deletedWine);
     }
+
+    public Wine updateById ( int searchedId, Wine wine) {
+        //TODO - gérer les exceptions
+        Wine updatedWine = inMemoryWineRepository.getOneById(searchedId);
+        wine.setId(updatedWine.getId());
+        return inMemoryWineRepository.save(wine);
+    }
 }
