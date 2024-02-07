@@ -34,7 +34,12 @@ public class InMemoryWineRepository {
     }
 
     public Wine save ( Wine newWine ) {
-        newWine.setId(getNextId());
+        if (newWine.getId() <= 0 ) {
+            newWine.setId(getNextId());
+        }
+        else {
+            wines.remove(getOneById(newWine.getId()));
+        }
         wines.add(newWine);
         return newWine;
     }

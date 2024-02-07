@@ -5,6 +5,7 @@ import lombok.*;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -27,6 +28,19 @@ public class Wine {
     // TODO
     // Service / Controller à créer
      private final List<Review> review = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Wine wine = (Wine) o;
+        return Objects.equals(name, wine.name) && Objects.equals(estate, wine.estate) && Objects.equals(year, wine.year);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, estate, year);
+    }
 
     @Override
     public String toString() {
