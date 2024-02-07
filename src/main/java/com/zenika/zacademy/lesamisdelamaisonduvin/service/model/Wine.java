@@ -1,10 +1,17 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.service.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Wine {
     private int id;
     private String name;
@@ -15,9 +22,9 @@ public class Wine {
     private Float alcoholPercentage;
     private Color color;
     private String region;
-    private String grapeVarieties;
+    private List<GrapeVarieties> grapeVarieties;
 
     // TODO
-    // Model / Controller à créer
-    // private Review review;
+    // Service / Controller à créer
+     private List<Review> review;
  }
