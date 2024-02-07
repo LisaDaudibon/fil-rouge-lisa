@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Colors {
+public enum WineColors {
     RED("rouge"),
     WHITE("blanc"),
     ROSE("rosé");

@@ -20,7 +20,7 @@ public class Wine {
     private String description;
     private Float price;
     private Float alcoholPercentage;
-    private Colors color;
+    private WineColors color;
     private String region;
     private Year year;
     private List<GrapeVarieties> grapeVarieties;
