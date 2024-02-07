@@ -1,9 +1,6 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.service.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -11,10 +8,22 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Review {
     private int id;
     private String author;
     private int score;
     private String comment;
     private LocalDate createdAt;
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", author='" + author + '\'' +
+                ", score=" + score +
+                ", comment='" + comment + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }
