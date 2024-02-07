@@ -14,6 +14,10 @@ public class InMemoryWineRepository {
     public List<Wine> getAll() {
         return wines.stream().toList();
     }
+    public long count() {
+        return wines.size();
+    }
+
     private int getNextId() {
         final int nextId;
         if (wines.isEmpty()) {
