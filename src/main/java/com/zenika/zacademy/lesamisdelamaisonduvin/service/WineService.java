@@ -1,30 +1,26 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.service;
 
+import com.zenika.zacademy.lesamisdelamaisonduvin.repository.InMemoryWineRepository;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Wine;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
 public class WineService {
-    private List<Wine> wines = new ArrayList<>();
+    private InMemoryWineRepository inMemoryWineRepository;
 
-    public WineService () { }
-    public WineService ( List <Wine> wines ) {
-        this.wines = wines;
+    public WineService ( InMemoryWineRepository inMemoryWineRepository) {
+        this.inMemoryWineRepository = inMemoryWineRepository;
     }
 
-    private int getNextId() {
-        final int nextId;
-        if (wines.isEmpty()) {
-            nextId = 1;
-        } else {
-            nextId = Collections.max(wines.stream() .map(Wine::getId).toList()) + 1;
-        }
-        return nextId;
+    public List<Wine> getAll () { return inMemoryWineRepository.getAll(); }
+
+    public Wine getOneById ( int searchedId ) {
+        return inMemoryWineRepository.getOneById(searchedId);
     }
 
-    public List<Wine> getAll () { return this.wines; }
+    public Wine create ( Wine newWine ) {
+        return inMemoryWineRepository.save(newWine);
+    }
 }
