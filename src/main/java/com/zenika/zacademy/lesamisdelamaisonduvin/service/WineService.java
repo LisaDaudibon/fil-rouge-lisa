@@ -17,10 +17,17 @@ public class WineService {
     public List<Wine> getAll () { return inMemoryWineRepository.getAll(); }
 
     public Wine getOneById ( int searchedId ) {
+        // TODO - gérer les exceptions
         return inMemoryWineRepository.getOneById(searchedId);
     }
 
     public Wine create ( Wine newWine ) {
+        // TODO - gérer les exceptions
         return inMemoryWineRepository.save(newWine);
+    }
+    public void deleteByID ( int searchedId ) {
+        // TODO - gérer les exceptions
+        Wine deletedWine = getOneById(searchedId);
+        inMemoryWineRepository.delete(deletedWine);
     }
 }

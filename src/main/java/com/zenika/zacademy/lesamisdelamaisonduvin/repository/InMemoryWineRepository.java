@@ -1,5 +1,6 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.repository;
 
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.WineService;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Wine;
 import org.springframework.stereotype.Repository;
 
@@ -36,5 +37,9 @@ public class InMemoryWineRepository {
         newWine.setId(getNextId());
         wines.add(newWine);
         return newWine;
+    }
+
+    public void delete (Wine deletedWine) {
+        wines.remove(deletedWine);
     }
 }

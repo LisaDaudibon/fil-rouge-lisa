@@ -16,6 +16,7 @@ import java.util.List;
 public class WineController {
     private final Logger logger = LoggerFactory.getLogger(WineController.class);
     private WineService wineService;
+    //TODO - Ajouter le mappeur WineDtoIn
     public WineController ( WineService wineService) {
         this.wineService = wineService;
     }
@@ -31,6 +32,7 @@ public class WineController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Wine getOneById (@PathVariable("id") int searchedId) {
+        // TODO - Gérer les cas d'erreur (try/catch + exception)
         logger.info("Return the wine associated with the id " + searchedId);
         return wineService.getOneById(searchedId);
     }
@@ -38,8 +40,19 @@ public class WineController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Wine create (@RequestBody Wine newWine) {
+        //TODO - Utiliser Hibernate Validator
         Wine wineAdded = wineService.create(newWine);
         logger.info("Wine created : " + wineAdded);
         return wineAdded;
     }
+
+    @DeleteMapping("{/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteById (@PathVariable("id") int searchedId){
+        // TODO - Gérer les cas d'erreurs (try/catch + exception)
+        logger.info("Deleted wine with id " + searchedId);
+        wineService.deleteByID(searchedId);
+    }
+
+
 }
