@@ -1,0 +1,10 @@
+services :
+  back:
+    image: docker-java-jar
+    ports:
+      - 3000:8082
+
+  front:
+    image: frontwine
+    ports:
+      - 3002:80
