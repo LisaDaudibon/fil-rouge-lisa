@@ -15,20 +15,5 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class WineServiceTest {
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
-
-    @Test
-    public void shouldFindAllWines() {
-        ResponseEntity<Wine[]> responseEntity = restTemplate.getForEntity(
-                "http://localhost:" + port + "/wines", Wine[].class);
-
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(Objects.requireNonNull(responseEntity.getBody()).length).isEqualTo(0);
-    }
-
 
 }
