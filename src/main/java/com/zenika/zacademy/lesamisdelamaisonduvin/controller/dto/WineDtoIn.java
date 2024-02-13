@@ -15,19 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WineDtoIn {
-    private int id;
     private String name;
     private String estate;
     private String appellation;
     private String description;
     private Float price;
     private Float alcoholPercentage;
-    private WineColors color;
+    private String color;
     private String region;
     private Year year;
     private List<String> grapeVarieties;
-
-    // TODO
-    // Service / Controller à créer
-//    private final List<Review> review = new ArrayList<>();
 }
