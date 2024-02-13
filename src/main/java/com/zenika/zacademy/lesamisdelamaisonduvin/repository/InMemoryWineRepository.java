@@ -9,7 +9,7 @@ import java.util.*;
 @Repository
 public class InMemoryWineRepository {
 
-    private static final Set<Wine> wines = new HashSet<>();
+    private final Set<Wine> wines = new HashSet<>();
 
     public List<Wine> getAll() {
         return wines.stream().toList();

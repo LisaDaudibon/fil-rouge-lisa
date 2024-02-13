@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/wines")
+@RequestMapping("/api/wines")
 public class WineController {
     private final Logger logger = LoggerFactory.getLogger(WineController.class);
     private WineService wineService;

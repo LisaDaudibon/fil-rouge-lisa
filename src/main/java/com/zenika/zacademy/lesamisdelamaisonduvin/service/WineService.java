@@ -14,11 +14,11 @@ public class WineService {
         this.inMemoryWineRepository = inMemoryWineRepository;
     }
 
-    public List<Wine> getAll () { return inMemoryWineRepository.getAll(); }
+    public List<Wine> getAll () { return this.inMemoryWineRepository.getAll(); }
 
     public Wine getOneById ( int searchedId ) {
         // TODO - gérer les exceptions
-        return inMemoryWineRepository.getOneById(searchedId);
+        return this.inMemoryWineRepository.getOneById(searchedId);
     }
 
     public Wine create ( Wine newWine ) {
@@ -28,12 +28,12 @@ public class WineService {
     public void deleteByID ( int searchedId ) {
         // TODO - gérer les exceptions
         Wine deletedWine = getOneById(searchedId);
-        inMemoryWineRepository.delete(deletedWine);
+        this.inMemoryWineRepository.delete(deletedWine);
     }
 
     public Wine updateById ( int searchedId, Wine wine) {
         //TODO - gérer les exceptions
-        Wine updatedWine = inMemoryWineRepository.getOneById(searchedId);
+        Wine updatedWine = this.getOneById(searchedId);
         wine.setId(updatedWine.getId());
         return inMemoryWineRepository.save(wine);
     }
