@@ -1,7 +1,10 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.service.model;
 
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.util.Arrays;
 
 @Getter
 @AllArgsConstructor
@@ -39,4 +42,14 @@ public enum GrapeVarieties {
     SYRAH("Syrah");
 
     private String name;
+
+    public static GrapeVarieties findByName(String name) throws BadRequestException {
+        return Arrays.stream(values()).filter(grapeVarieties -> grapeVarieties.name.equals(name))
+                .findFirst()
+                .orElseThrow(BadRequestException::new);
+    }
+
+    public String getName() {
+        return name;
+    }
 }
