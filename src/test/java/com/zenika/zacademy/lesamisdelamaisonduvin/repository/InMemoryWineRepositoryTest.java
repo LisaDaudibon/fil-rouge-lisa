@@ -25,7 +25,7 @@ public class InMemoryWineRepositoryTest {
             .build();
 
     InMemoryWineRepository inMemoryWineRepository = new InMemoryWineRepository();
-     Wine result = inMemoryWineRepository.save(defaultWine);
+    Wine result = inMemoryWineRepository.save(defaultWine);
 
     @Nested
     class save {
@@ -35,7 +35,7 @@ public class InMemoryWineRepositoryTest {
         @DisplayName("New wine must be saved in in-memory list")
         public void shouldSaveWine() {
             Wine savedResult = inMemoryWineRepository.save(defaultWine);
-            assertEquals(savedResult.getId(), 2);
+            assertEquals(savedResult.getId(), 1);
             assertEquals(inMemoryWineRepository.count(), 1);
         }
     }
