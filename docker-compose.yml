@@ -1,10 +1,20 @@
 services :
   back:
-    image: docker-java-jar
+    image: docker-java-jar:latest
     ports:
       - 3000:8082
 
+  postgres_db:
+    image: postgres:16-alpine
+    ports:
+      - 5430:5432
+    restart: unless-stopped
+    environment:
+      USERNAME: postgres
+      POSTGRES_PASSWORD: lisa
+      POSTGRES_DB: wine_lisa_db
+
   front:
-    image: frontwine
+    image: frontwine:latest
     ports:
       - 3002:80
