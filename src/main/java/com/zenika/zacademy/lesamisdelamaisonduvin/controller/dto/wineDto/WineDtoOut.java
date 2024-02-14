@@ -1,4 +1,4 @@
-package com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto;
+package com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.wineDto;
 
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Review;
 import lombok.*;

@@ -1,5 +1,6 @@
-package com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto;
+package com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.wineDto;
 
+import com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.reviewDto.ReviewMapper;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.exception.BadRequestException;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.GrapeVarieties;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Wine;
@@ -11,6 +12,12 @@ import java.util.List;
 
 @Component
 public class WineMapper {
+    private final ReviewMapper reviewMapper;
+
+    public WineMapper(ReviewMapper reviewMapper) {
+        this.reviewMapper = reviewMapper;
+    }
+
     public WineDtoOut toDto(Wine from) {
         return WineDtoOut.builder()
                 .id(from.getId()) //Wine send his id to the Dto but the Dto doesn't send one back

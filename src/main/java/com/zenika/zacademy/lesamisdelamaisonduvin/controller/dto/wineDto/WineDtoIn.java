@@ -1,6 +1,7 @@
-package com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto;
+package com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.wineDto;
 
 
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Review;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -36,4 +37,6 @@ public class WineDtoIn {
     private Year year;
     @NotEmpty
     private List<String> grapeVarieties;
+
+    private List<Review> reviews;
 }
