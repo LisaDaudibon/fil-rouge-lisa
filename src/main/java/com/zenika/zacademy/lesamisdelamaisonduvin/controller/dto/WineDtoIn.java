@@ -1,8 +1,6 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto;
 
-import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.GrapeVarieties;
-import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Review;
-import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.WineColors;
+
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +8,6 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.time.Year;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
