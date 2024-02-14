@@ -25,9 +25,7 @@ public class Wine {
     private Year year;
     private List<GrapeVarieties> grapeVarieties;
 
-    // TODO
-    // Service / Controller à créer
-     private final List<Review> review = new ArrayList<>();
+    private final List<Review> reviews = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
@@ -56,7 +54,7 @@ public class Wine {
                 ", region='" + region + '\'' +
                 ", year=" + year +
                 ", grapeVarieties=" + grapeVarieties +
-                ", review=" + review +
+                ", review=" + reviews +
                 '}';
     }
 }

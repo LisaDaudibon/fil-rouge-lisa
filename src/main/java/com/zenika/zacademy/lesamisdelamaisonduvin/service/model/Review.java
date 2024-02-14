@@ -2,7 +2,8 @@ package com.zenika.zacademy.lesamisdelamaisonduvin.service.model;
 
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -14,7 +15,21 @@ public class Review {
     private String author;
     private int score;
     private String comment;
-    private LocalDate createdAt;
+    private Instant createdAt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return Objects.equals(author, review.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(author);
+    }
+
 
     @Override
     public String toString() {
