@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface WineRepository {
     List<Wine> getAll ();
+    int getNextId();
+    int getNextReviewId();
     Wine save (Wine newWine) throws NotFoundException;
     Wine getOneById(int searchedId) throws NotFoundException;
     void delete(Wine deletedWine) throws NotFoundException;

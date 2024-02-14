@@ -1,17 +1,22 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.controller;
 
-import com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.WineDtoIn;
-import com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.WineDtoOut;
-import com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.WineMapper;
+import com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.reviewDto.ReviewDtoOut;
+import com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.reviewDto.ReviewMapper;
+import com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.wineDto.WineDtoIn;
+import com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.wineDto.WineDtoOut;
+import com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.wineDto.WineMapper;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.WineService;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.exception.BadRequestException;
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.exception.DuplicateRequestException;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.exception.NotFoundException;
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Review;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Wine;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -27,10 +32,12 @@ public class WineController {
 
     private WineService wineService;
     private WineMapper wineMapper;
+    private ReviewMapper reviewMapper;
 
-    public WineController ( WineService wineService, WineMapper wineMapper) {
+    public WineController ( WineService wineService, WineMapper wineMapper, ReviewMapper reviewMapper) {
         this.wineService = wineService;
         this.wineMapper = wineMapper;
+        this.reviewMapper = reviewMapper;
     }
 
     //Port 8082
@@ -50,7 +57,6 @@ public class WineController {
     @Operation(summary = "Get a wine using it's id")
     @ResponseStatus(HttpStatus.OK)
     public WineDtoOut getOneById (@PathVariable("id") int searchedId) throws NotFoundException {
-        // TODO - Gérer les cas d'erreur (try/catch + exception)
         logger.info("Return the wine associated with the id " + searchedId);
         return wineMapper.toDto(wineService.getOneById(searchedId));
     }
@@ -62,14 +68,14 @@ public class WineController {
             @ApiResponse(responseCode = "400", description = "Invalid wine object supplied", content = @Content),
     })
     @ResponseStatus(HttpStatus.CREATED)
-    public WineDtoOut create (@RequestBody WineDtoIn newWine) throws BadRequestException, NotFoundException {
-        //TODO - Finish handling exception
+    public WineDtoOut create (@RequestBody @Valid WineDtoIn newWine) throws BadRequestException, NotFoundException {
         try {
             Wine wineAdded = this.wineService.create(wineMapper.toModel(newWine));
+
             logger.info("Wine created : " + wineAdded);
             return this.wineMapper.toDto(wineAdded);
-        } catch (NotFoundException e) {
-            throw new NotFoundException();
+        } catch (BadRequestException e) {
+            throw new BadRequestException();
         }
     }
 
@@ -77,7 +83,6 @@ public class WineController {
     @Operation(summary = "Delete a wine using id")
     @ResponseStatus(HttpStatus.OK)
     public void deleteById (@PathVariable("id") int searchedId) throws NotFoundException{
-        // TODO - Gérer les cas d'erreurs (try/catch + exception)
         logger.info("Deleted wine with id " + searchedId);
         wineService.deleteByID(searchedId);
     }
@@ -85,9 +90,16 @@ public class WineController {
     @PutMapping("/{id}")
     @Operation(summary = "Update one wine with id")
     @ResponseStatus(HttpStatus.CREATED)
-    public WineDtoOut updateById (@PathVariable("id") int searchedId, @RequestBody WineDtoIn wineUpdated) throws BadRequestException, NotFoundException {
-        // TODO - Gérer les cas d'erreur (try / catch + exception)
+    public WineDtoOut updateById (@PathVariable("id") int searchedId, @RequestBody @Valid WineDtoIn wineUpdated) throws BadRequestException, NotFoundException {
         logger.info("Update a Wine with id " + searchedId);
         return wineMapper.toDto(wineService.updateById(searchedId, wineMapper.toModel(wineUpdated)));
+    }
+
+    @PostMapping("/{id}/reviews")
+    @Operation(summary = "Create a new review for a wine")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ReviewDtoOut saveReview (@PathVariable("id") int searchedId, @RequestBody @Valid Review newReview ) throws DuplicateRequestException, NotFoundException {
+        logger.info("Create a new review" + newReview);
+        return reviewMapper.toDto(wineService.saveReviewToWine(searchedId, newReview));
     }
 }

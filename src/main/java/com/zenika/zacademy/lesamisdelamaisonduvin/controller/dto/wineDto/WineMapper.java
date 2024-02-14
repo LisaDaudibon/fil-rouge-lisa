@@ -31,7 +31,7 @@ public class WineMapper {
                 .grapeVarieties(from.getGrapeVarieties().stream().map(GrapeVarieties::getName).toList())
                 .alcoholPercentage(from.getAlcoholPercentage())
                 .appellation(from.getAppellation())
-//                .reviews(from.getReviews().stream().map(reviewMapper::toDto).toList())
+                .reviews(from.getReviews().stream().map(reviewMapper::toDto).toList())
                 .build();
     }
 

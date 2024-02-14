@@ -1,6 +1,7 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.repository;
 
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.exception.NotFoundException;
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Review;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Wine;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -20,7 +21,7 @@ public class InMemoryWineRepository implements WineRepository{
         return wines.size();
     }
 
-    private int getNextId() {
+    public int getNextId() {
         final int nextId;
         if (wines.isEmpty()) {
             nextId = 1;
@@ -28,6 +29,14 @@ public class InMemoryWineRepository implements WineRepository{
             nextId = Collections.max(wines.stream() .map(Wine::getId).toList()) + 1;
         }
         return nextId;
+    }
+
+    public int getNextReviewId() {
+        try {
+            return Collections.max(wines.stream().flatMap(wine -> wine.getReviews().stream().map(Review::getId)).toList()) + 1;
+        } catch (NoSuchElementException exception) {
+            return 1;
+        }
     }
 
     public Wine getOneById ( int searchedId ) throws NotFoundException {

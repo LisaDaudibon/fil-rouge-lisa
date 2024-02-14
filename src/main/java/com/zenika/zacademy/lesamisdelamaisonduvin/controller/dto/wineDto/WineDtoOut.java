@@ -1,5 +1,6 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.wineDto;
 
+import com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto.reviewDto.ReviewDtoOut;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Review;
 import lombok.*;
 
@@ -24,5 +25,5 @@ public class WineDtoOut {
     private Year year;
     private List<String> grapeVarieties;
 
-    private List<Review> reviews;
+    private List<ReviewDtoOut> reviews;
 }
