@@ -44,7 +44,7 @@ public enum GrapeVarieties {
     private String name;
 
     public static GrapeVarieties findByName(String name) throws BadRequestException {
-        return Arrays.stream(values()).filter(grapeVarieties -> grapeVarieties.name.equals(name))
+        return Arrays.stream(values()).filter(grapeVarieties -> grapeVarieties.name.equalsIgnoreCase(name))
                 .findFirst()
                 .orElseThrow(BadRequestException::new);
     }

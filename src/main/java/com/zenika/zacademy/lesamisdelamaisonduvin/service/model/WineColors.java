@@ -16,7 +16,7 @@ public enum WineColors {
     private final String wineColor;
 
     public static WineColors findByColor (String wineColor) throws BadRequestException {
-        return Arrays.stream(values()).filter(wineColors -> wineColors.wineColor.contentEquals(wineColor))
+        return Arrays.stream(values()).filter(wineColors -> wineColors.wineColor.equalsIgnoreCase(wineColor))
                 .findFirst()
                 .orElseThrow(BadRequestException::new);
     }

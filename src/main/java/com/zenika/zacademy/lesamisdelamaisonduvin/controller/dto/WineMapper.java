@@ -20,7 +20,7 @@ public class WineMapper {
                 .description(from.getDescription())
                 .price(from.getPrice())
                 .year(from.getYear())
-                .color(from.getColor())
+                .color(from.getColor().getColor())
                 .grapeVarieties(from.getGrapeVarieties().stream().map(GrapeVarieties::getName).toList())
                 .alcoholPercentage(from.getAlcoholPercentage())
                 .appellation(from.getAppellation())

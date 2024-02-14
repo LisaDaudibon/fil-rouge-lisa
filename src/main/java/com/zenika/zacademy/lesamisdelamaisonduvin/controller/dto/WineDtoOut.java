@@ -1,8 +1,7 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.controller.dto;
 
 
-import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.GrapeVarieties;
-import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.WineColors;
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Review;
 import lombok.*;
 
 import java.time.Year;
@@ -21,8 +20,10 @@ public class WineDtoOut {
     private String description;
     private Float price;
     private Float alcoholPercentage;
-    private WineColors color;
+    private String color;
     private String region;
     private Year year;
     private List<String> grapeVarieties;
+
+    private List<Review> reviews;
 }
