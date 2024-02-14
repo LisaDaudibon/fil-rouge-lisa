@@ -1,5 +1,6 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.repository;
 
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.exception.NotFoundException;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Wine;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -29,22 +30,22 @@ public class InMemoryWineRepository implements WineRepository{
         return nextId;
     }
 
-    public Wine getOneById ( int searchedId ) {
+    public Wine getOneById ( int searchedId ) throws NotFoundException {
         for (Wine wine : wines) {
             if (wine.getId() == searchedId ) {
                 return wine;
             }
         }
-        return null;
+        throw new NotFoundException();
     }
 
-    public Wine save ( Wine newWine ) {
+    public Wine save ( Wine newWine ) throws NotFoundException {
         if (newWine.getId() <= 0 ) {
             newWine.setId(getNextId());
-        }
-        else {
+        } else {
             wines.remove(getOneById(newWine.getId()));
         }
+
         wines.add(newWine);
         return newWine;
     }

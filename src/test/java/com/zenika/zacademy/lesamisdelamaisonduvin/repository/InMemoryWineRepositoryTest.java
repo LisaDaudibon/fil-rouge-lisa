@@ -1,5 +1,7 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.repository;
 
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.exception.BadRequestException;
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.exception.NotFoundException;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.GrapeVarieties;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Wine;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.WineColors;
@@ -25,7 +27,14 @@ public class InMemoryWineRepositoryTest {
             .build();
 
     InMemoryWineRepository inMemoryWineRepository = new InMemoryWineRepository();
-    Wine result = inMemoryWineRepository.save(defaultWine);
+    @BeforeAll
+    public void shouldSetupTest () throws NotFoundException {
+        try {
+            Wine result = inMemoryWineRepository.save(defaultWine);
+        } catch (NotFoundException e) {
+            throw new NotFoundException();
+        }
+    }
 
     @Nested
     class save {
@@ -33,7 +42,7 @@ public class InMemoryWineRepositoryTest {
         @Test
         @Order(1)
         @DisplayName("New wine must be saved in in-memory list")
-        public void shouldSaveWine() {
+        public void shouldSaveWine() throws NotFoundException {
             Wine savedResult = inMemoryWineRepository.save(defaultWine);
             assertEquals(savedResult.getId(), 1);
             assertEquals(inMemoryWineRepository.count(), 1);
@@ -58,7 +67,7 @@ public class InMemoryWineRepositoryTest {
         @Test
         @Order(3)
         @DisplayName("Wine must be found with the id")
-        public void shouldGetOneWithId () {
+        public void shouldGetOneWithId () throws NotFoundException {
             Wine result = inMemoryWineRepository.getOneById(defaultWine.getId());
             assertEquals(result.getId(), 1);
             assertEquals(inMemoryWineRepository.count(), 1);

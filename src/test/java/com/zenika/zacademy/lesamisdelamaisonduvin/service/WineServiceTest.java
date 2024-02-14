@@ -1,6 +1,7 @@
 package com.zenika.zacademy.lesamisdelamaisonduvin.service;
 
 import com.zenika.zacademy.lesamisdelamaisonduvin.repository.InMemoryWineRepository;
+import com.zenika.zacademy.lesamisdelamaisonduvin.service.exception.NotFoundException;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.GrapeVarieties;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Wine;
 import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.WineColors;
@@ -31,7 +32,7 @@ class WineServiceTest {
     List<Wine> allWine = wineService.getAll();
 
     @BeforeEach
-    void shouldSetupTest() {
+    void shouldSetupTest() throws NotFoundException{
 //        allWine.clear();
         wineService.create(defaultWine);
     }
@@ -42,7 +43,7 @@ class WineServiceTest {
 
         @Test
         @Order(1)
-        public void shouldCreateNewWine() {
+        public void shouldCreateNewWine() throws NotFoundException {
             Wine addedWine = Wine.builder()
                     .name("Parcelle de Jean")
                     .estate("Jeannine Boutin")
@@ -80,7 +81,7 @@ class WineServiceTest {
 
         @Test
         @Order(3)
-        public void shouldGetOneById () {
+        public void shouldGetOneById () throws NotFoundException{
             Wine wineFound = wineService.getOneById(1);
 
             assertEquals(wineFound.getId(), 1);
