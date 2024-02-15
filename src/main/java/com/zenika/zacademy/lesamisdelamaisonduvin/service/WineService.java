@@ -8,9 +8,7 @@ import com.zenika.zacademy.lesamisdelamaisonduvin.service.model.Wine;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class WineService {
@@ -59,5 +57,12 @@ public class WineService {
 
             return savedReview;
         }
+    }
+
+    public void deleteReviewFromWine ( int searchedWineId, int deletedReviewId) throws NotFoundException {
+        Wine wineFound = this.getOneById(searchedWineId);
+
+        wineFound.getReviews().removeIf(review -> review.getId() == deletedReviewId);
+        this.wineRepository.save(wineFound);
     }
 }

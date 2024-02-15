@@ -99,7 +99,15 @@ public class WineController {
     @Operation(summary = "Create a new review for a wine")
     @ResponseStatus(HttpStatus.CREATED)
     public ReviewDtoOut saveReview (@PathVariable("id") int searchedId, @RequestBody @Valid Review newReview ) throws DuplicateRequestException, NotFoundException {
-        logger.info("Create a new review" + newReview);
+        logger.info("Create a new review " + newReview);
         return reviewMapper.toDto(wineService.saveReviewToWine(searchedId, newReview));
+    }
+
+    @DeleteMapping("/{wineId}/reviews/{reviewId}")
+    @Operation(summary = "Delete a review from a wine")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteReview ( @PathVariable("wineId") int searchedWineId, @PathVariable("reviewId") int deletedReviewId) throws NotFoundException {
+        logger.info("Delete review with id " + deletedReviewId + " from wine with id " + searchedWineId);
+        this.wineService.deleteReviewFromWine(searchedWineId, deletedReviewId);
     }
 }
