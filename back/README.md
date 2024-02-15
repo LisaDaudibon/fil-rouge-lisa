@@ -45,7 +45,7 @@ Cette API doit fournir deux modèles de données (ressources) :
 
 Les différents EndPoints devront suivre le nommage suivant :
 
-![swagger](./swagger.png)
+![swagger](swagger.png)
 
 On ajoute des avis à un vin, d'où le passage par les urls :
 
