@@ -1,20 +1,32 @@
 services :
-  back:
-    image: docker-java-jar:latest
-    ports:
-      - 3000:8082
 
   postgres_db:
+    container_name: postgres_container
     image: postgres:16-alpine
     ports:
-      - 5430:5432
+      - 5432:5432
     restart: unless-stopped
     environment:
       USERNAME: postgres
       POSTGRES_PASSWORD: lisa
-      POSTGRES_DB: wine_lisa_db
+      POSTGRES_DB: maisonvin
+
+  back:
+    container_name: maisonvin-back
+    ports:
+      - 8080:8082
+    build:
+      context: back
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_container:5432/maisonvin
+    restart: unless-stopped
 
   front:
-    image: frontwine:latest
+    container_name: maisonvin-front
+    build:
+      context: front
+      dockerfile: Dockerfile
     ports:
-      - 3002:80
+      - 8888:80
+    restart: unless-stopped
