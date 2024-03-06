@@ -1,6 +1,7 @@
 export interface Wine {
   id: number;
   name: string;
+  description: string
   estate: string;
   appellation: string;
   price: number;

@@ -3,11 +3,10 @@
     <img alt="Grapes Shape" height="500" src="assets/images/grapes-shape.png" width="800">
   </div>
   <div class="container">
-    <div
-        class="swiper banner_slider swiper-creative swiper-3d swiper-initialized swiper-horizontal swiper-pointer-events">
-        <div aria-live="off" class="swiper-wrapper" id="swiper-container" >
-            <app-individual-wine *ngFor="let wine of $fetchedWines | async; trackBy: trackByWineId" class="swiper-slide" [data]="wine"></app-individual-wine>
-        </div>
+    <div class="swiper banner_slider swiper-creative swiper-3d swiper-initialized swiper-horizontal swiper-pointer-events">
+      <div aria-live="off" class="swiper-wrapper" id="swiper-container" >
+        <app-wine *ngFor="let wine of $fetchedWines | async; trackBy: trackByWineId" class="swiper-slide" [data]="wine"></app-wine>
+      </div>
     </div>
   </div>
 </section>

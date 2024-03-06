@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IndividualWineComponent } from './individual-wine.component';
+import { WineComponent } from './wine.component';
 
 describe('SwiperComponent', () => {
-  let component: IndividualWineComponent;
-  let fixture: ComponentFixture<IndividualWineComponent>;
+  let component: WineComponent;
+  let fixture: ComponentFixture<WineComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [IndividualWineComponent]
+      declarations: [WineComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(IndividualWineComponent);
+    fixture = TestBed.createComponent(WineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

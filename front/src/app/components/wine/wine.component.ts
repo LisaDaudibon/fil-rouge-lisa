@@ -3,11 +3,11 @@ import { Wine } from '../../model/wine';
 
 
 @Component({
-  selector: 'app-individual-wine',
-  templateUrl: './individual-wine.component.html',
+  selector: 'app-wine',
+  templateUrl: './wine.component.html',
 
 })
-export class IndividualWineComponent {
+export class WineComponent {
   @Input({ required: true}) data!: Wine;
 
   async getProducts(): Promise<Wine[]> {
