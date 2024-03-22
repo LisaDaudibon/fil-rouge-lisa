@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit{
     this.$fetchedWines = this._wineService.$fetchWines
   }
 
-  trackByWineId(index: number, wine: Wine) { return wine.id }
+  trackByWineId(index: number, wine: Wine):number { return wine.id }
 
   ngOnInit() {
     new (window as any).Swiper(".banner_slider", {
